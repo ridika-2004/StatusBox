@@ -3,10 +3,10 @@
 A small project to learn how to upload status with a text editor with django.
 
 ### Simplified Project Structure
-```
+```console
 status_project/
 │
-├── posts/                # App for status/posts
+├── posts/                
 │   ├── models.py
 │   ├── views.py
 │   ├── forms.py
@@ -15,7 +15,7 @@ status_project/
 │       ├── create_post.html
 │       └── home.html
 │
-├── status_project/       # Django settings, urls
+├── status_project/      
 │   ├── settings.py
 │   └── urls.py
 │
@@ -25,20 +25,20 @@ status_project/
 ## Guide
 
 #### Install Packages
-```
+```console
 pip install django django-ckeditor
 ```
 
 #### Setup Django Project & App
 Open terminal and write
-```
+```console
 django-admin startproject status_project
 cd status_project
 python manage.py startapp posts
 ```
 
 #### Configure `settings.py`
-```
+```python
 INSTALLED_APPS = [
     ...
     'ckeditor',
@@ -52,7 +52,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 ```
 
 #### Create Model in `posts/models.py`
-```
+```python
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
@@ -68,7 +68,7 @@ class StatusPost(models.Model):
 ```
 
 #### Create Form in `posts/forms.py`
-```
+```python
 from django import forms
 from .models import StatusPost
 
@@ -79,7 +79,7 @@ class StatusPostForm(forms.ModelForm):
 ```
 
 #### Views in `posts/views.py`
-```
+```python
 from django.shortcuts import render, redirect
 from .forms import StatusPostForm
 from .models import StatusPost
@@ -105,7 +105,7 @@ def create_post(request):
 
 #### URLs 
 in `posts/urls.py`
-```
+```python
 from django.urls import path
 from . import views
 
@@ -115,7 +115,7 @@ urlpatterns = [
 ]
 ```
 In `status_project/urls.py`
-```
+```python
 from django.contrib import admin
 from django.urls import path, include
 
@@ -126,7 +126,7 @@ urlpatterns = [
 ```
 #### In `posts/templates/posts`
 create `create_post.html`
-```
+```html
 {% extends 'posts/base.html' %}
 
 {% block content %}
@@ -142,7 +142,7 @@ create `create_post.html`
 {% endblock %}
 ```
 create `base.html`
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,7 +167,7 @@ create `base.html`
 </html>
 ```
 create `home.html`
-```
+```html
 {% extends 'posts/base.html' %}
 
 {% block content %}
@@ -186,11 +186,11 @@ create `home.html`
 {% endblock %}
 ```
 #### Run Collectstatic
-```
+```console
 python manage.py collectstatic
 ```
 #### Run & Test
-```
+```console
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
